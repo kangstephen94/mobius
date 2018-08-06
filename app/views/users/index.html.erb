@@ -1,0 +1,15 @@
+<h2>Your Credits: <%= current_user.credit %></h2>
+<h3>Send Credits</h3>
+<ul>
+  <% @users.each do |user| %>
+    <% if user != current_user %>
+      <li><%= user.email %></li> 
+      <form action="<%= send_credits_user_url(user.id) %>" method="POST">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="hidden" name="_method" value="PATCH">
+        <input type="text" name="user[credit]">
+        <input type="submit" value="Send Credits">
+      </form>
+    <% end %>
+  <% end %>
+</ul>
