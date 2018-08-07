@@ -1,7 +1,8 @@
 class SessionsController < ApplicationController
+
   def new
     if logged_in?
-      redirect_to root_url 
+      redirect_to root_url  # Restrict access to /session/new if the user is logged in.
     else 
       render :new
     end 
