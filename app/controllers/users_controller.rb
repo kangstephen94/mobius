@@ -10,7 +10,11 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    render :new
+    if logged_in?
+      redirect_to root_url 
+    else 
+      render :new
+    end 
   end
 
   def create
@@ -38,7 +42,7 @@ class UsersController < ApplicationController
       receiving_user.update_attributes(credit: receiving_updated_credits)
       @transaction = Transaction.create(from: current_user.id, to: params[:id], amount: amount_sent)
       flash[:notice] = "Sucessfully sent #{amount_sent} credits to #{receiving_user.email}"
-      render :index
+      redirect_to users_url
     else 
       flash[:errors] = ['Not enough credits, please add more']
       redirect_to users_url
