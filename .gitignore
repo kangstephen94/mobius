@@ -26,3 +26,6 @@
 /config/master.key
 
 /config/app_environment_variables.rb
+
+# Ignore application configuration
+/config/application.yml
